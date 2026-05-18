@@ -1,0 +1,30 @@
+/* Tema oscuro más profundo sobre Bootstrap 5 (data-bs-theme en index.html) */
+[data-bs-theme='dark'] {
+  --bs-body-bg: #0f1115;
+  --bs-body-color: #dee2e6;
+  --bs-emphasis-color: #f8f9fa;
+  --bs-secondary-color: #adb5bd;
+  --bs-secondary-bg: #161b22;
+  --bs-tertiary-bg: #1c222c;
+  --bs-border-color: #30363d;
+  --bs-border-color-translucent: rgba(240, 246, 252, 0.1);
+  --bs-primary: #7c3aed;
+  --bs-primary-rgb: 124, 58, 237;
+  --bs-link-color: #a78bfa;
+  --bs-link-hover-color: #c4b5fd;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background-color: var(--bs-body-bg);
+  background-image: radial-gradient(
+    ellipse 100% 60% at 50% -10%,
+    rgba(124, 58, 237, 0.12),
+    transparent 50%
+  );
+}

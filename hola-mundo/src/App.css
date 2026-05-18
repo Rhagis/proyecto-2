@@ -1,0 +1,310 @@
+/* Luz giratoria alrededor de botones (.btn-spin-glow envuelve al <button>) */
+
+.btn-spin-glow {
+  --btn-spin-speed: 2.75s;
+  --btn-spin-glow1: rgba(196, 181, 253, 0.95);
+  --btn-spin-glow2: rgba(124, 58, 237, 0.85);
+  --btn-spin-glow3: rgba(167, 139, 250, 0.65);
+
+  position: relative;
+  display: inline-flex;
+  padding: 2px;
+  border-radius: inherit;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.btn-spin-glow::before {
+  content: '';
+  position: absolute;
+  width: 180%;
+  height: 180%;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  rotate: 0deg;
+  z-index: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg 300deg,
+    var(--btn-spin-glow1) 318deg,
+    var(--btn-spin-glow2) 330deg,
+    var(--btn-spin-glow3) 342deg,
+    transparent 360deg
+  );
+  animation: btn-spin-glow-rotate var(--btn-spin-speed) linear infinite;
+  pointer-events: none;
+}
+
+.btn-spin-glow > .btn {
+  position: relative;
+  z-index: 1;
+  border-radius: inherit !important;
+}
+
+/* Botones outline: fondo igual al body para tapar el centro del cono */
+.btn-spin-glow > .btn.btn-outline-primary {
+  background-color: var(--bs-body-bg);
+}
+
+.btn-spin-glow > .btn.btn-outline-primary:hover {
+  background-color: var(--bs-primary);
+}
+
+.btn-spin-glow > .btn:disabled {
+  opacity: 0.65;
+}
+
+.btn-spin-glow:has(> .btn:disabled)::before {
+  animation-play-state: paused;
+  opacity: 0.45;
+}
+
+.btn-spin-glow--block {
+  display: flex;
+  width: 100%;
+}
+
+@keyframes btn-spin-glow-rotate {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-spin-glow::before {
+    animation: none;
+    opacity: 0.35;
+  }
+}
+
+/* ——— Lista de libros (búsqueda + catálogo) ——— */
+
+.lista-libros {
+  --lista-bg: rgba(22, 27, 34, 0.92);
+  --lista-bg-hover: rgba(30, 37, 48, 0.98);
+  --lista-accent: rgba(167, 139, 250, 0.55);
+  --lista-border-inner: rgba(240, 246, 252, 0.06);
+}
+
+.lista-libros__titulo-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  color: var(--bs-primary);
+  background: linear-gradient(145deg, rgba(124, 58, 237, 0.25), rgba(124, 58, 237, 0.06));
+  border: 1px solid rgba(167, 139, 250, 0.25);
+}
+
+.lista-libros__item {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.95rem 1.1rem !important;
+  background-color: var(--lista-bg) !important;
+  color: var(--bs-body-color) !important;
+  border-color: var(--lista-border-inner) !important;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
+}
+
+.lista-libros__item:not(:last-child) {
+  border-bottom: 1px solid var(--lista-border-inner) !important;
+}
+
+.lista-libros__item:hover {
+  background-color: var(--lista-bg-hover) !important;
+  box-shadow: inset 4px 0 0 0 var(--lista-accent);
+}
+
+.lista-libros__item:active {
+  transform: scale(0.998);
+}
+
+.lista-libros__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.65rem;
+  height: 2.65rem;
+  border-radius: 0.55rem;
+  color: #c4b5fd;
+  background: linear-gradient(160deg, rgba(124, 58, 237, 0.35), rgba(124, 58, 237, 0.08));
+  border: 1px solid rgba(167, 139, 250, 0.22);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.lista-libros__icon svg {
+  display: block;
+}
+
+.lista-libros__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.lista-libros__etiqueta {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bs-secondary-color);
+}
+
+.lista-libros__nombre {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--bs-emphasis-color);
+  word-break: break-word;
+}
+
+.lista-libros__item--alerta {
+  cursor: default;
+}
+
+.lista-libros__item--alerta:hover {
+  box-shadow: inset 4px 0 0 0 rgba(251, 191, 36, 0.65);
+}
+
+.lista-libros__icon--alerta {
+  color: #fcd34d;
+  background: linear-gradient(160deg, rgba(251, 191, 36, 0.22), rgba(251, 191, 36, 0.05));
+  border-color: rgba(251, 191, 36, 0.28);
+}
+
+.lista-libros__item--alerta .lista-libros__nombre {
+  color: #fde68a;
+  font-weight: 500;
+  font-size: 0.98rem;
+}
+
+.lista-libros__vacio {
+  background: rgba(22, 27, 34, 0.5);
+}
+
+/* Catálogo / búsqueda: una tarjeta por libro */
+.lista-libros--tarjetas {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 17.5rem), 1fr));
+}
+
+.lista-libros--tarjetas-sola {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 28rem;
+  margin-inline: auto;
+}
+
+.libro-tarjeta {
+  --libro-tarjeta-bg: rgba(22, 27, 34, 0.92);
+  background-color: var(--libro-tarjeta-bg) !important;
+  color: var(--bs-body-color) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.libro-tarjeta:hover {
+  border-color: rgba(167, 139, 250, 0.45) !important;
+  box-shadow:
+    0 6px 28px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 1px rgba(167, 139, 250, 0.12);
+}
+
+.libro-tarjeta:active {
+  transform: scale(0.995);
+}
+
+.libro-tarjeta__cabecera,
+.libro-tarjeta__cuerpo {
+  background-color: transparent !important;
+}
+
+.libro-tarjeta__titulo {
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--bs-emphasis-color);
+}
+
+.libro-tarjeta__grid {
+  display: grid;
+  gap: 0.75rem 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.libro-tarjeta__meta {
+  min-width: 0;
+}
+
+.libro-tarjeta__meta:nth-child(5) {
+  grid-column: 1 / -1;
+}
+
+.libro-tarjeta__etiqueta {
+  margin: 0;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bs-secondary-color);
+}
+
+.libro-tarjeta__valor {
+  margin: 0.2rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--bs-emphasis-color);
+  word-break: break-word;
+}
+
+.libro-tarjeta--alerta {
+  cursor: default;
+  box-shadow: inset 0 0 0 1px rgba(251, 191, 36, 0.15);
+}
+
+.libro-tarjeta--alerta:hover {
+  border-color: rgba(251, 191, 36, 0.45) !important;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 1px rgba(251, 191, 36, 0.2);
+}
+
+.libro-tarjeta__titulo--alerta {
+  color: #fde68a;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+@media (max-width: 399.98px) {
+  .libro-tarjeta__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .libro-tarjeta__meta:nth-child(5) {
+    grid-column: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lista-libros__item:active {
+    transform: none;
+  }
+
+  .libro-tarjeta:active {
+    transform: none;
+  }
+}
