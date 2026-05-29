@@ -13,13 +13,10 @@ function App() {
 
   return (
     <>
-      <h1>Bienvenido a mi biblioteca</h1>
-      <nav>
-        <Link to='/'>Inicio</Link>
+      <nav className="nav flex-row justify-content-center mb-4 border-bottom border-secondary pb-3 bg-dark shadow-lg">
+        <Link className="nav-link text-light" to="/lista">Lista de libros</Link>
         <br />
-        <Link to="/lista">Lista de libros</Link>
-        <br />
-        <Link to='/libro/añadir'>Añadir Libro</Link>
+        <Link className="nav-link text-light" to='/libro/añadir'>Añadir Libro</Link>
       </nav>
       <Routes>
         <Route path='/'></Route>
@@ -28,7 +25,7 @@ function App() {
         <Route path='/libro/añadir' element={<AñadirLibro></AñadirLibro>}></Route>
         <Route path='/lista/libro/editar/:idLibro' element={<EditarLibro></EditarLibro>}></Route>
       </Routes>
-
+      
 
     </>
   )

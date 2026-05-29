@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import axios from "axios"
 
 
@@ -16,117 +16,71 @@ const libro = {
 }
 
 const EditarLibro = () => {
+    const navegar = useNavigate()
     const [datos, setDatos] = useState(libro)
-    const { id } = useParams()
+    const { idLibro } = useParams()
+    const [tomos, setTomos] = useState('')
+    const [estado, setEstado] = useState('')
 
+   
 
     useEffect(() => {
 
         axios
-            .get(`http://localhost:3000/libros/libro/${id}`)
-            .then((response) => setDatos(response.data))
-    }, [id])
+            .get(`http://localhost:3000/libros/libro/${idLibro}`)
+            .then((response) => {
+                setDatos(response.data)
+                setTomos(response.data.tomos)
+                setEstado(response.data.estado)
+            })
+    }, [idLibro])
+
+    const editarElementos = () => {
+        const cantidadTomos = {tomos: Number(tomos)}
+        const estadoLibro = {estado: estado}
+
+        if(datos.tomos !== tomos){
+            axios.put(`http://localhost:3000/libros/libro/update/tomos/${idLibro}`, cantidadTomos)
+        }
+        if(datos.estado !== estado){
+            axios.put(`http://localhost:3000/libros/libro/update/estado/${idLibro}`, estadoLibro)
+        }
+        navegar(`/lista/libro/${idLibro}`)
+    }
 
     return (<>
 
         <form action="">
+            
             <div className="mb-3">
-                <label className="form-label text-secundary small" htmlFor="nombre"></label>
-                <input
-                    id="nombre"
-                    name="nombre"
-                    type="text"
-                    value={datos.nombre}
-                    className="form-control"
-                    placeholder="Nombre del Libro"
-                    readOnly
-                />
-            </div>
-            <div className="mb-3">
-                <label className="form-label text-secundary small" htmlFor="nombre"></label>
-                <input
-                    id="autor"
-                    name="autor"
-                    type="text"
-                    value={datos.autor}
-                    className="form-control"
-                    placeholder="Autor del Libro"
-                    readOnly
-                />
-            </div>
-            <div className="mb-3">
-                <label className="form-label text-secundary small" htmlFor="nombre"></label>
-                <input
-                    id="tipo"
-                    name="tipo"
-                    type="text"
-                    value={datos.tipo}
-                    className="form-control"
-                    placeholder="Tipo de Libro"
-                    readOnly
-                />
-            </div>
-            <div className="mb-3">
-                <label className="form-label text-secundary small" htmlFor="nombre"></label>
-                <input
-                    id="editorial"
-                    name="editorial"
-                    type="text"
-                    value={datos.editorial}
-                    className="form-control"
-                    placeholder="Editorial del Libro"
-                    readOnly
-                />
-            </div>
-            <div className="mb-3">
-                <label className="form-label text-secundary small" htmlFor="nombre"></label>
-                <input
-                    id="genero"
-                    name="genero"
-                    type="text"
-                    value={datos.genero}
-                    className="form-control"
-                    placeholder="Genero del Libro"
-                    readOnly
-                />
-            </div>
-            <div className="mb-3">
-                <label className="form-label text-secundary small" htmlFor="nombre"></label>
+                <label className="form-label text-secundary small" htmlFor="tomos"></label>
                 <input
                     id="tomos"
                     name="tomos"
                     type="number"
-                    value={datos.tomos}
+                    value={tomos}
                     className="form-control"
                     placeholder="Cantidad de tomos"
-                    readOnly
+                    onChange={(e) => setTomos(e.target.value)}
+                    
                 />
+                
             </div>
-            <div className="mb-3">
-                <label className="form-label text-secundary small" htmlFor="nombre"></label>
-                <input
-                    id="paginas"
-                    name="paginas"
-                    type="number"
-                    value={datos.paginas_por_libro}
-                    className="form-control"
-                    placeholder="Cantidad de Paginas"
-                    readOnly
-                />
-            </div>
-            <div className="mb-3">
-                <label className="form-label text-secundary small" htmlFor="nombre"></label>
+            <div className="mb-3 form-check">
+                <label className="form-check-label text-secundary small" htmlFor="estado"></label>
                 <input
                     id="estado"
                     name="estado"
-                    type="text"
-                    value={datos.estado}
-                    className="form-control"
-                    placeholder="Estado de la coleccion"
-                    readOnly
+                    type="checkbox"
+                    checked={estado === 'completada'}
+                    className="form-check-input"
+                    onChange={(e) => setEstado(e.target.checked ? 'completada' : 'publicandose')}
+
+                    
                 />
+                
             </div>
-            <button type="submit">Editar</button>
+            <button type="submit" onClick={editarElementos}>Editar</button>
         </form>
     </>)
 }

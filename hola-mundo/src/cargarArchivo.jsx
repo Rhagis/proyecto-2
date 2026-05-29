@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const libroVacio = {
     nombre: '',
@@ -13,6 +14,7 @@ const libroVacio = {
 }
 
 const AñadirLibro = () => {
+    const navegar = useNavigate()
     const [nuevoLibro, setNuevoLibro] = useState(libroVacio)
     const [enviando, setEnviando] = useState(false)
     const [mensaje, setMensaje] = useState(null)
@@ -59,6 +61,7 @@ const AñadirLibro = () => {
                 })
             })
             .finally(() => setEnviando(false))
+        navegar('/lista')
     }
 
     return (
@@ -201,10 +204,10 @@ const AñadirLibro = () => {
                     <input
                         id="estado"
                         name="estado"
-                        type="text"
-                        className="form-control"
-                        value={nuevoLibro.estado}
-                        onChange={(e) => actualizarCampo('estado', e.target.value)}
+                        type="checkbox"
+                        className="form-check-input"
+                        checked={nuevoLibro.estado === 'completada'}
+                        onChange={(e) => actualizarCampo('estado', e.target.checked ? 'completada' : 'publicandose')}
                         placeholder="Estado del libro"
                         required
                     />
