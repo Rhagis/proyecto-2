@@ -27,12 +27,14 @@ const ObtenerDatos = () => {
             {datos.map((dato) => (
                 <MostrarDato
                     key={dato.id}
+                    id={dato.id}
                     nombre={dato.nombre}
                     autor={dato.autor}
                     tipo={dato.tipo}
                     editorial={dato.editorial}
                     tomos={dato.tomos}
                     estado={dato.estado}
+                    mostrarInfo={false}
                 />
             ))}
         </div>

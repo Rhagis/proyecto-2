@@ -1,7 +1,13 @@
+import { useState } from "react"
+import { Link, Route, useParams } from "react-router-dom"
+import ObtenerDatoPorId from "./ObtenerDatoEspecifico"
+
 function valorMostrable(valor) {
     if (valor === undefined || valor === null || valor === '') return 'Sin dato'
     return String(valor)
 }
+
+
 
 function IconoLibro() {
     return (
@@ -34,30 +40,49 @@ function Meta({ etiqueta, valor }) {
     )
 }
 
-function MostrarDato({ nombre, autor, tipo, editorial, tomos, estado }) {
+
+
+
+
+function MostrarDato({ id, nombre, autor, tipo, editorial, tomos, estado, mostrarInfo }) {
+    const [masDatos, setMasDatos] = useState(false)
+    const [mostrar, setMostrar] = useState(mostrarInfo)
+
+
     return (
-        <article className="libro-tarjeta card border-secondary h-100">
-            <div className="libro-tarjeta__cabecera card-body d-flex gap-3 align-items-start">
-                <span className="lista-libros__icon flex-shrink-0" aria-hidden="true">
-                    <IconoLibro />
-                </span>
-                <div className="min-w-0">
-                    <p className="lista-libros__etiqueta mb-1">Libro</p>
-                    <h3 className="libro-tarjeta__titulo h5 mb-0 text-break">
-                        {nombre ? String(nombre) : 'Sin título'}
-                    </h3>
+        <>
+            <article className="libro-tarjeta card border-secondary h-100">
+                <div className="libro-tarjeta__cabecera card-body d-flex gap-3 align-items-start">
+                    <span className="lista-libros__icon flex-shrink-0" aria-hidden="true">
+                        <IconoLibro />
+                    </span>
+                    <div className="min-w-0">
+                        <p className="lista-libros__etiqueta mb-1">Libro</p>
+                        <h3 className="libro-tarjeta__titulo h5 mb-0 text-break">
+                            {nombre ? String(nombre) : 'Sin título'}
+
+                        </h3>
+
+                    </div>
                 </div>
-            </div>
-            <dl className="libro-tarjeta__cuerpo card-body border-top border-secondary border-opacity-25 mb-0 pt-3">
-                <div className="libro-tarjeta__grid">
-                    <Meta etiqueta="Autor" valor={autor} />
-                    <Meta etiqueta="Tipo" valor={tipo} />
-                    <Meta etiqueta="Editorial" valor={editorial} />
-                    <Meta etiqueta="Tomos" valor={tomos} />
-                    <Meta etiqueta="Estado" valor={estado} />
-                </div>
-            </dl>
-        </article>
+
+                <dl className="libro-tarjeta__cuerpo card-body border-top border-secondary border-opacity-25 mb-0 pt-3" >
+
+
+                    {mostrar && (<div className="libro-tarjeta__grid" >
+
+                        <Meta etiqueta="Autor" valor={autor} />
+                        <Meta etiqueta="Tipo" valor={tipo} />
+                        <Meta etiqueta="Editorial" valor={editorial} />
+                        <Meta etiqueta="Tomos" valor={tomos} />
+                        <Meta etiqueta="Estado" valor={estado} />
+                    </div>)}
+                </dl>
+                {!mostrar && <Link to={`/lista/libro/${id}`} >Mas Datos</Link>}
+                {mostrar && <Link to='/lista'>Volver</Link>}
+            </article>
+
+        </>
     )
 }
 

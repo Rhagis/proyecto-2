@@ -12,12 +12,11 @@ const libroVacio = {
     estado: '',
 }
 
-const AñadirLibro = ({ funcion, index }) => {
+const AñadirLibro = () => {
     const [nuevoLibro, setNuevoLibro] = useState(libroVacio)
     const [enviando, setEnviando] = useState(false)
     const [mensaje, setMensaje] = useState(null)
-    const setMostrarBuscador = () => funcion()
-    const setIdLibro = (dato) => index(dato)
+    //const setIdLibro = (dato) => index(dato)
 
     const actualizarCampo = (campo, valor) => {
         setNuevoLibro((prev) => ({ ...prev, [campo]: valor }))
@@ -46,10 +45,10 @@ const AñadirLibro = ({ funcion, index }) => {
                         nombre: nuevoLibro.nombre,
                     }
                 }).
-                    then((data) => setIdLibro(data.id))
-                setNuevoLibro(libroVacio)
+
+                    setNuevoLibro(libroVacio)
                 setMensaje({ tipo: 'ok', texto: 'Libro guardado correctamente.' })
-                setMostrarBuscador()
+
 
             })
             .catch((error) => {

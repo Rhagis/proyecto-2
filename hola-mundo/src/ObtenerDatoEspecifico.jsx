@@ -1,11 +1,18 @@
 import axios from 'axios'
 import { useState, useEffect, startTransition } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+
 
 import MostrarDato from './MostrarDato'
 
-const ObtenerDatoPorId = ({ idLibro }) => {
+
+
+
+const ObtenerDatoPorId = () => {
+    const navegar = useNavigate()
     const [datos, setDatos] = useState([])
     const [error, setError] = useState(true)
+    const { idLibro } = useParams()
 
     useEffect(() => {
         startTransition(() => {
@@ -17,17 +24,31 @@ const ObtenerDatoPorId = ({ idLibro }) => {
             .catch(() => setError(false))
     }, [idLibro])
 
+    const borrarDatos = () => {
+        const confirmar = window.confirm("Estas seguro que deseas borrar el libro?")
+        if (confirmar) {
+            axios.delete(`http://localhost:3000/libros/libro/borrar/${idLibro}`)
+            navegar('/lista')
+        }
+    }
+
+    const editarDatos = () => {
+        navegar(`/lista/libro/editar/${idLibro}`)
+    }
     return (
         <>
+
             {error ? (
                 <MostrarDato
                     key={datos.id}
+                    id={datos.id}
                     nombre={datos.nombre}
                     autor={datos.autor}
                     tipo={datos.tipo}
                     editorial={datos.editorial}
                     tomos={datos.tomos}
                     estado={datos.estado}
+                    mostrarInfo={true}
                 />
             ) : (
                 <div className="libro-tarjeta libro-tarjeta--alerta card border-secondary h-100">
@@ -52,6 +73,8 @@ const ObtenerDatoPorId = ({ idLibro }) => {
                     </div>
                 </div>
             )}
+            <button onClick={editarDatos}>Editar</button>
+            <button onClick={borrarDatos}>Eliminar</button>
         </>
     )
 }
