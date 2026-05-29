@@ -18,7 +18,6 @@ const AñadirLibro = () => {
     const [nuevoLibro, setNuevoLibro] = useState(libroVacio)
     const [enviando, setEnviando] = useState(false)
     const [mensaje, setMensaje] = useState(null)
-    //const setIdLibro = (dato) => index(dato)
 
     const actualizarCampo = (campo, valor) => {
         setNuevoLibro((prev) => ({ ...prev, [campo]: valor }))
