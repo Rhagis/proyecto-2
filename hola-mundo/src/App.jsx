@@ -13,7 +13,9 @@ function App() {
 
   return (
     <>
-      <nav className="nav flex-row justify-content-center mb-4 border-bottom border-secondary pb-3 bg-dark shadow-lg">
+      <nav className="nav flex-row justify-content-center gap-3 mb-4 border-bottom border-secondary pb-3 bg-dark shadow-lg">
+        <Link className="nav-link text-light" to='/'>Inicio</Link>
+        <br />
         <Link className="nav-link text-light" to="/lista">Lista de libros</Link>
         <br />
         <Link className="nav-link text-light" to='/libro/añadir'>Añadir Libro</Link>

@@ -212,15 +212,15 @@ const AñadirLibro = () => {
                     />
                 </div>
 
-                <span className="btn-spin-glow btn-spin-glow--block rounded-3 mt-2">
+                
                     <button
                         type="submit"
-                        className="btn btn-primary btn-lg w-100 rounded-3"
+                        className="btn btn-primary btn-lg rounded-3"
                         disabled={enviando}
                     >
                         {enviando ? 'Guardando…' : 'Guardar libro'}
                     </button>
-                </span>
+                
             </div>
         </form>
     )

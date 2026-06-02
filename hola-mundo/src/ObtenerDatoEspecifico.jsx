@@ -73,8 +73,9 @@ const ObtenerDatoPorId = () => {
                     </div>
                 </div>
             )}
-            <button onClick={editarDatos}>Editar</button>
-            <button onClick={borrarDatos}>Eliminar</button>
+            <button className="btn btn-primary btn-lg rounded-3" onClick={editarDatos}>Editar</button>
+            <button className="btn btn-danger btn-lg  rounded-3" onClick={borrarDatos}>Eliminar</button>
+            <button className="btn btn-secondary btn-lg rounded-3" onClick={() => navegar('/lista')}>Volver</button>
         </>
     )
 }

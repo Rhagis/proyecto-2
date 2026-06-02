@@ -78,8 +78,7 @@ function MostrarDato({ id, nombre, autor, tipo, editorial, tomos, estado, mostra
                         <Meta etiqueta="Estado" valor={estado} />
                     </div>)}
                 </dl>
-                {!mostrar && <Link to={`/lista/libro/${id}`} >Mas Datos</Link>}
-                {mostrar && <Link to='/lista'>Volver</Link>}
+                {!mostrar && <button><Link to={`/lista/libro/${id}`} >Mas Datos</Link></button>}
             </article>
 
         </>

@@ -50,10 +50,10 @@ const EditarLibro = () => {
 
     return (<>
 
-        <form action="">
+        <form  className="card border-secondary bg-dark shadow-lg w-25 mx-auto">
             
             <div className="mb-3">
-                <label className="form-label text-secundary small" htmlFor="tomos"></label>
+                <label className="form-label text-secundary small" htmlFor="tomos">Cantidad de tomos</label>
                 <input
                     id="tomos"
                     name="tomos"
@@ -67,7 +67,7 @@ const EditarLibro = () => {
                 
             </div>
             <div className="mb-3 form-check">
-                <label className="form-check-label text-secundary small" htmlFor="estado"></label>
+                <label className="form-check-label text-secundary small" htmlFor="estado">Estado del libro</label>
                 <input
                     id="estado"
                     name="estado"
@@ -75,13 +75,18 @@ const EditarLibro = () => {
                     checked={estado === 'completada'}
                     className="form-check-input"
                     onChange={(e) => setEstado(e.target.checked ? 'completada' : 'publicandose')}
+                    placeholder="Estado del libro"
 
                     
                 />
-                
+                 
             </div>
-            <button type="submit" onClick={editarElementos}>Editar</button>
+            <div className="d-flex gap-2">
+            <button className="btn btn-primary btn-lg rounded-3 w-50" type="submit" onClick={editarElementos}>Editar</button>
+            <button className="btn btn-secondary btn-lg rounded-3 w-50" type="submit" onClick={() => navegar(`/lista/libro/${idLibro}`)}>Cancelar</button>
+            </div>
         </form>
+       
     </>)
 }
 
