@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import './App.css'
 import ObtenerDato from './ObtenerDatos'
 import ObtenerDatoPorId from './ObtenerDatoEspecifico'
@@ -10,6 +10,7 @@ import { FavoritosProvider } from './context/FavoritosContext'
 function App() {
 
   const [mostrarBuscador, setMostrarBuscador] = useState(false)
+  const { favoritos } = useContext(FavoritosProvider)
 
 
   return (
