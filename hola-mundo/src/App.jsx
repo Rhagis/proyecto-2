@@ -21,6 +21,7 @@ function App() {
           <br />
           <Link className="nav-link text-light" to='/libro/añadir'>Añadir Libro</Link>
           <Link className="nav-link text-light" to='/favoritos'>Favoritos</Link>
+          <span className="badge bg-secondary">{favoritos.length}</span>
       </nav>
       <Routes>
         <Route path='/' element={<AñadirLibro></AñadirLibro>}></Route>
