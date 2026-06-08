@@ -3,8 +3,13 @@ import { createContext, useState } from "react";
 export const FavoritosContext = createContext()
 
 export const FavoritosProvider = ({ children }) => {
-    const [favoritos, setFavoritos] = useState([])
-    console.log(favoritos)
+    
+      const [favoritos, setFavoritos] = useState(() => {
+        const favoritosGuardados = localStorage.getItem("favoritos")
+        return favoritosGuardados ? JSON.parse(favoritosGuardados) : []
+    })
+
+    
 
     const agregarAFavoritos = (libro) => {
         const existe = favoritos.some((l) => l.id === libro.id)
@@ -12,12 +17,15 @@ export const FavoritosProvider = ({ children }) => {
             alert("El libro ya está en favoritos")
             return
         }
-        setFavoritos([...favoritos, libro])
-        console.log(favoritos)
+        const nuevosFavoritos =[...favoritos, libro]
+        setFavoritos(nuevosFavoritos)
+        localStorage.setItem("favoritos",JSON.stringify(nuevosFavoritos))
     }
 
     const eliminarDeFavoritos = (libro) => {
-        setFavoritos(favoritos.filter((l) => l.id !== libro.id))
+        const nuevosFavoritos = favoritos.filter((l) => l.id !== libro.id)
+        setFavoritos(nuevosFavoritos)
+        localStorage.setItem("favoritos",JSON.stringify(nuevosFavoritos))
     }
 
     return (
