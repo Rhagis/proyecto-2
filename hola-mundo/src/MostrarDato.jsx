@@ -1,6 +1,7 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { Link, Route, useParams } from "react-router-dom"
 import ObtenerDatoPorId from "./ObtenerDatoEspecifico"
+import { FavoritosContext, FavoritosProvider } from "./context/FavoritosContext"
 
 function valorMostrable(valor) {
     if (valor === undefined || valor === null || valor === '') return 'Sin dato'
@@ -47,7 +48,17 @@ function Meta({ etiqueta, valor }) {
 function MostrarDato({ id, nombre, autor, tipo, editorial, tomos, estado, mostrarInfo }) {
     const [masDatos, setMasDatos] = useState(false)
     const [mostrar, setMostrar] = useState(mostrarInfo)
+    const { agregarAFavoritos, eliminarDeFavoritos } = useContext(FavoritosContext)
+    const [esFavorito, setEsFavorito] = useState(false)
 
+    const onClick = () => {
+        if (esFavorito) {
+            eliminarDeFavoritos({ id, nombre, autor, tipo, editorial, tomos, estado })
+        } else {
+            agregarAFavoritos({ id, nombre, autor, tipo, editorial, tomos, estado })
+        }
+        setEsFavorito(!esFavorito)
+    }
 
     return (
         <>
@@ -58,10 +69,15 @@ function MostrarDato({ id, nombre, autor, tipo, editorial, tomos, estado, mostra
                     </span>
                     <div className="min-w-0">
                         <p className="lista-libros__etiqueta mb-1">Libro</p>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px'}}>
                         <h3 className="libro-tarjeta__titulo h5 mb-0 text-break">
                             {nombre ? String(nombre) : 'Sin título'}
 
                         </h3>
+                        <button onClick={onClick}>
+      {esFavorito ? "⭐" : "☆"}
+    </button>
+                        </div>
 
                     </div>
                 </div>
@@ -76,6 +92,7 @@ function MostrarDato({ id, nombre, autor, tipo, editorial, tomos, estado, mostra
                         <Meta etiqueta="Editorial" valor={editorial} />
                         <Meta etiqueta="Tomos" valor={tomos} />
                         <Meta etiqueta="Estado" valor={estado} />
+                        
                     </div>)}
                 </dl>
                 {!mostrar && <button><Link to={`/lista/libro/${id}`} >Mas Datos</Link></button>}

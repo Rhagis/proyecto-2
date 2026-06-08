@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { useState, useEffect, startTransition } from 'react'
+import { useState, useEffect, startTransition, useContext } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-
+import { FavoritosContext } from './context/FavoritosContext'
 
 import MostrarDato from './MostrarDato'
 
@@ -35,6 +35,9 @@ const ObtenerDatoPorId = () => {
     const editarDatos = () => {
         navegar(`/lista/libro/editar/${idLibro}`)
     }
+
+    const { agregarAFavoritos, eliminarDeFavoritos } = useContext(FavoritosContext)
+
     return (
         <>
 

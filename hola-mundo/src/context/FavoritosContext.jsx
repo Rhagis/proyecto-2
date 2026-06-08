@@ -4,9 +4,16 @@ export const FavoritosContext = createContext()
 
 export const FavoritosProvider = ({ children }) => {
     const [favoritos, setFavoritos] = useState([])
+    console.log(favoritos)
 
     const agregarAFavoritos = (libro) => {
+        const existe = favoritos.some((l) => l.id === libro.id)
+        if (existe) {
+            alert("El libro ya está en favoritos")
+            return
+        }
         setFavoritos([...favoritos, libro])
+        console.log(favoritos)
     }
 
     const eliminarDeFavoritos = (libro) => {

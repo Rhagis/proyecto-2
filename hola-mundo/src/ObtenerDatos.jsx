@@ -4,6 +4,7 @@ import MostrarDato from './MostrarDato.jsx'
 
 const ObtenerDatos = () => {
     const [datos, setDatos] = useState([])
+    const [esFavorito, setEsFavorito] = useState(false)
     useEffect(() => {
         axios
             .get('http://localhost:3000/libros/lista')
@@ -25,6 +26,7 @@ const ObtenerDatos = () => {
     return (
         <div className="lista-libros lista-libros--tarjetas">
             {datos.map((dato) => (
+                
                 <MostrarDato
                     key={dato.id}
                     id={dato.id}
@@ -36,7 +38,10 @@ const ObtenerDatos = () => {
                     estado={dato.estado}
                     mostrarInfo={false}
                 />
-            ))}
+                
+            ))
+            } 
+               
         </div>
     )
 }
