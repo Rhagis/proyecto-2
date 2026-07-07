@@ -1,4 +1,10 @@
 [{
     "user": "matias",
-    "pass": "pikachu17"
+    "pass": "pikachu17",
+    "rol": "admin"
+},
+{
+    "user":"rhagis",
+    "pass":"pikachu17",
+    "rol":"reader"
 }]

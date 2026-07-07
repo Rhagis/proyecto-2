@@ -10,6 +10,8 @@ import { FavoritosProvider, FavoritosContext } from './context/FavoritosContext'
 import RutaPrivada from './RutaPrivada'
 import  Login  from './login'
 import  {AuthProvider, AuthContext } from './AuthContext'
+import { useNavigate } from 'react-router-dom'
+import validarFormulario from './validadorDeFormulario'
 
 
 function App() {
@@ -29,6 +31,7 @@ function App() {
           <Link className="nav-link text-light" to="/lista">Lista de libros</Link>
           <Link className="nav-link text-light" to='/favoritos'>Favoritos</Link>
           <span className="badge bg-secondary">{favoritos.length}</span>
+          <button onClick={logout}>Cerrar Sesion</button>
           
           
       </nav>
@@ -44,7 +47,7 @@ function App() {
         </Route>
       </Routes>
 
-      <button onClick={()=> logout }></button>
+      
       
       
       

@@ -21,6 +21,7 @@ const EditarLibro = () => {
     const { idLibro } = useParams()
     const [tomos, setTomos] = useState('')
     const [estado, setEstado] = useState('')
+    const rol = localStorage.getItem("rol")
 
    
 
@@ -46,6 +47,10 @@ const EditarLibro = () => {
             axios.put(`http://localhost:3000/libros/libro/update/estado/${idLibro}`, estadoLibro)
         }
         navegar(`/lista/libro/${idLibro}`)
+    }
+
+    if(rol != "admin"){
+        return
     }
 
     return (<>

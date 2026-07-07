@@ -11,7 +11,7 @@ const Login = () => {
 
     login(usuario,password)
     const userValido = localStorage.getItem("usuario") || null
-    
+    console.log(userValido)
     const verificado = () => {
         
         if(userValido){
@@ -30,7 +30,7 @@ const Login = () => {
                 <label htmlFor="password">Password</label>
                 <input type="password" placeholder="introduce tu password" onChange={(e)=> setPassword(e.target.value)}></input>
                 </div>
-                <button type="submit">Logear</button>
+                <button type="submit" onClick={verificado}>Logear</button>
             </form>
 
         </>

@@ -12,7 +12,16 @@ const ObtenerDatoPorId = () => {
     const navegar = useNavigate()
     const [datos, setDatos] = useState([])
     const [error, setError] = useState(true)
+    const [mostrar, setMostrar] = useState(true)
+    const rol = localStorage.getItem("rol")
     const { idLibro } = useParams()
+
+    useEffect(()=>{
+        if(rol != "admin"){
+        setMostrar(false)
+    }
+    })    
+    
 
     useEffect(() => {
         startTransition(() => {
@@ -38,6 +47,7 @@ const ObtenerDatoPorId = () => {
 
     const { agregarAFavoritos, eliminarDeFavoritos } = useContext(FavoritosContext)
 
+    
     return (
         <>
 
@@ -76,8 +86,8 @@ const ObtenerDatoPorId = () => {
                     </div>
                 </div>
             )}
-            <button className="btn btn-primary btn-lg rounded-3" onClick={editarDatos}>Editar</button>
-            <button className="btn btn-danger btn-lg  rounded-3" onClick={borrarDatos}>Eliminar</button>
+            {mostrar && <button className="btn btn-primary btn-lg rounded-3" onClick={editarDatos}>Editar</button>}
+            {mostrar && <button className="btn btn-danger btn-lg  rounded-3" onClick={borrarDatos}>Eliminar</button>}
             <button className="btn btn-secondary btn-lg rounded-3" onClick={() => navegar('/lista')}>Volver</button>
         </>
     )
