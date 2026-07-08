@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { useState, useEffect, startTransition, useContext } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { FavoritosContext } from './context/FavoritosContext'
+import { FavoritosContext } from '../context/FavoritosContext'
 
-import MostrarDato from './MostrarDato'
+import MostrarDato from '../pages/MostrarDato'
 
 
 

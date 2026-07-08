@@ -1,5 +1,5 @@
 import { render, fireEvent } from '@testing-library/react'
-import ValidadorTest from './ValidadorDeFormulario'
+import ValidadorTest from './components/ValidadorDeFormulario'
 import vitest from 'vitest'
 import {vi,test,expect, describe} from 'vitest'
 

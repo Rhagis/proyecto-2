@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 
 import { useState, createContext } from "react";
-import usuarios from '../data/usuarios.json'
+import usuarios from '../../data/usuarios.json'
 
 
 export const AuthContext = createContext()

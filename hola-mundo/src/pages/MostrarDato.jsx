@@ -1,7 +1,7 @@
 import { useState, useContext } from "react"
 import { Link, Route, useParams } from "react-router-dom"
-import ObtenerDatoPorId from "./ObtenerDatoEspecifico"
-import { FavoritosContext, FavoritosProvider } from "./context/FavoritosContext"
+import ObtenerDatoPorId from "../components/ObtenerDatoEspecifico"
+import { FavoritosContext, FavoritosProvider } from "../context/FavoritosContext"
 
 function valorMostrable(valor) {
     if (valor === undefined || valor === null || valor === '') return 'Sin dato'

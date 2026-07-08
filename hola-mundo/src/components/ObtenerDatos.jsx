@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import MostrarDato from './MostrarDato.jsx'
+import MostrarDato from '../pages/MostrarDato.jsx'
 
 const ObtenerDatos = () => {
     const [datos, setDatos] = useState([])

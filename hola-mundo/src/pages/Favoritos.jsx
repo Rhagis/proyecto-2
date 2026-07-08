@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { FavoritosContext } from "./context/FavoritosContext";
+import { FavoritosContext } from "../context/FavoritosContext";
 
 
 const Favoritos = () => {
